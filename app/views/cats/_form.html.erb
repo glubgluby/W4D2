@@ -1,0 +1,46 @@
+    <% action = cat.persisted? ? cat_url(cat) : cats_url%>
+    <% button_text = cat.persisted? ? "Edit Cat" : "Create Cat"%>
+ <form action = "<%=action%>" method = "POST"> 
+    <%if cat.persisted?%>
+        <input type = "hidden" name = "_method" value = "PATCH">
+    <%end%>
+    <h2>
+    <label for = "cat_form">Stupid Cat:  
+    </h2>
+    <br>
+    <label for = "cat_name">Cat name:
+        <input type = "text" name = "cat[name]" id="cat.name" value = "<%= cat.name%>">
+    </label>
+    <br>
+    <label for = "cat_color">Cat color: 
+        <input type = "text" name = "cat[color]" id="cat.color" value = "<%= cat.color%>">
+    </label>    
+    <br>
+    <label for = "cat_sex">Cat sex: 
+        M <input type = "radio" name = "cat[sex]" id="cat.sex" value = "M" 
+        <%if cat.persisted? && cat.sex == "M"%>
+        <%='checked'%>
+        <%end%>> 
+        F <input type = "radio" name = "cat[sex]" id="cat.sex" value = "F"
+        <%if cat.persisted? && cat.sex == "F"%>
+        <%='checked'%>
+        <%end%>>
+
+    </label>   
+    <br>
+    <label for = "cat_birth_date">Cat birthday: 
+        <input type = "date" name = "cat[birth_date]" id="cat.birth_date" value = "<%= cat.birth_date%>">
+    </label>    
+    <br> 
+    <br>
+    <label for = "cat_description">Cat description:
+    <textarea name = "cat[description]" id="cat.description" ><%=cat.description%></textarea>
+
+    </label>
+    
+     
+        
+    </label>
+    <br>
+    <input type = "submit" value  = "<%=button_text%>"">
+</form>

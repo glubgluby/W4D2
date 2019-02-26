@@ -1,0 +1,52 @@
+<h1>Stupid Cat</h1>
+
+<table>
+    <thead>
+        <tr>
+            <%= "#{@cat.name} is a stupid cat" %> <br>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td> <%="Color: #{@cat.color}"%> </td>
+            <td> <%="Age: #{@cat.age} year(s) old"%> </td>
+            <td> <%= "Sex: #{@cat.sex == 'M' ? 'Male' : 'Female'}"%> </td>
+        </tr>
+        
+    </tbody>
+
+</table>
+
+<%= @cat.description%> <br><br><br>
+<%unless @requests.empty?%>
+<h3><%= 'RENTAL REQUESTS'%> </h3><br>
+<%end%>
+<% @requests.each do |request|%>
+    <%='From '%>
+    <%=request.start_date%>
+    <%=' to '%>
+    <%=request.end_date%>
+    <br>
+    <%= '        Current status: '%>
+    <%=request.status%>
+    <br>
+    <%if request.status == 'PENDING'%>
+        <input type="submit" value = "Approve">
+        <input type="submit" value = "Deny">
+        <br>
+    <%end%>
+<%end%>
+<br>
+<br>
+<a href = "<%=cats_url%>"> Look at all the dumb cats </a>
+<br>
+<br>
+<a href = "<%=edit_cat_url(@cat)%>"> Edit this cat or something idk </a>
+
+<form action ="catrentalrequests_url" method = "POST">
+    Start Rental Date: <input type = "date" name = "cat_rental_request[start_date]"><br>
+    End Rental Date: <input type = "date" name = "cat_rental_request[end_date]"><br>
+    <input type ="submit" value = "Mistakenly rent this stupid cat">
+    <input type = "hidden" name = "cat_rental_request[cat_id]" value = "<%=@cat.id%>%">
+</form>
